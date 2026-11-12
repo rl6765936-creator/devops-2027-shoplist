@@ -4,8 +4,8 @@ FROM python:3.11-slim
 WORKDIR /app
 # העתקת קובץ התלויות מהמחשב לתיקיית העבודה בקונטיינר
 COPY requirements.txt .
-# התקנת הספריות המוגדרות בקובץ התלויות ללא שמירת קבצי מטמון
-RUN pip install --no-cache-dir -r requirements.txt
+# התקנת הספריות המוגדרות בקובץ התלויות ללא שמירת קבצי מטמון (עם trusted-host בשביל הרשת של נטפרי)
+RUN pip install --no-cache-dir --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
 # העתקת קובץ השרת לתיקיית העבודה בקונטיינר
 COPY app.py .
 # הצהרה שהשרת מאזין לפורט 8000 בתוך הקונטיינר

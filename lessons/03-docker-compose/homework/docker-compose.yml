@@ -1,0 +1,26 @@
+services:
+  # greeter בעברית: מחזיר "Shalom", נגיש במחשב בפורט 9001
+  greeter-he:
+    build:
+      context: ../../02-docker-basics/homework/greeter
+    environment:
+      GREETING: Shalom
+    ports:
+      - "9001:8000"
+    # בונוס: בדיקה כל 10 שניות שהשרת עונה בכתובת /health
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+
+  # greeter באנגלית: אותו קוד, אבל מחזיר "Hello", נגיש במחשב בפורט 9002
+  greeter-en:
+    build:
+      context: ../../02-docker-basics/homework/greeter
+    environment:
+      GREETING: Hello
+    ports:
+      - "9002:8000"
+    # בונוס: בדיקה כל 10 שניות שהשרת עונה בכתובת /health
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s

@@ -19,6 +19,13 @@ spec:
         - name: stats
           image: "{{ .Values.stats.image.repository }}:{{ .Values.stats.image.tag }}"
           imagePullPolicy: {{ .Values.imagePullPolicy }}
+          resources:
+            requests:
+              cpu: {{ .Values.stats.resources.requests.cpu | quote }}
+              memory: {{ .Values.stats.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.stats.resources.limits.cpu | quote }}
+              memory: {{ .Values.stats.resources.limits.memory }}
           env:
             - name: BACKEND_URL
               valueFrom:

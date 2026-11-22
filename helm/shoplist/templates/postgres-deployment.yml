@@ -16,6 +16,13 @@ spec:
       containers:
         - name: postgres
           image: postgres:15-alpine
+          resources:
+            requests:
+              cpu: {{ .Values.postgres.resources.requests.cpu | quote }}
+              memory: {{ .Values.postgres.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.postgres.resources.limits.cpu | quote }}
+              memory: {{ .Values.postgres.resources.limits.memory }}
           envFrom:
             - secretRef:
                 name: postgres-secret

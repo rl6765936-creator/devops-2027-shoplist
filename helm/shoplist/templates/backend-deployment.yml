@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: shoplist
+  namespace: {{ .Release.Namespace }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.backend.replicas }}
   selector:
     matchLabels:
       app: backend
@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: shoplist-backend:local
-          imagePullPolicy: Never
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: DB_HOST
               valueFrom:

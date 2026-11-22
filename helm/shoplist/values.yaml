@@ -53,3 +53,8 @@ postgres:
     limits:
       cpu: "1"
       memory: 512Mi
+
+backup:
+  enabled: true
+  schedule: "0 2 * * *"
+  storage: 1Gi
